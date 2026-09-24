@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Education Vocabulary — Collins Practice</title>
+<style>
+  :root{
+    --navy:#0b132b;
+    --navy2:#1c2541;
+    --ielts-red:#d90429;
+    --blue-accent:#3a86ff;
+    --paper:#f8fafc;
+    --card:#ffffff;
+    --ink:#0b132b;
+    --muted:#64748b;
+    --radius:16px;
+    --shadow:0 8px 24px rgba(11,19,43,0.08);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+  body{min-height:100vh;padding-bottom:60px;}
+
+  header.topbar{
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy2) 100%);
+    color:#fff;padding:18px;position:sticky;top:0;z-index:50;
+    box-shadow:0 4px 18px rgba(0,0,0,.2);
+  }
+  .topbar-inner{max-width:1000px;margin:0 auto;}
+  .badge{
+    display:inline-block;background:var(--ielts-red);color:#fff;font-size:11px;font-weight:800;
+    letter-spacing:1px;padding:5px 12px;border-radius:20px;text-transform:uppercase;margin-bottom:8px;
+  }
+  header.topbar h1{margin:0 0 4px;font-size:clamp(18px,3.6vw,24px);}
+  header.topbar p{margin:0;color:#94a3b8;font-size:13px;}
+
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+  nav.tabs button{
+    flex:1 1 140px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+    color:#e2e8f0;padding:10px 8px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;
+    transition:.2s;text-align:center;
+  }
+  nav.tabs button.active{background:var(--ielts-red);border-color:var(--ielts-red);color:#fff;}
+  nav.tabs button:hover:not(.active){background:rgba(255,255,255,0.16);}
+
+  main{max-width:1000px;margin:0 auto;padding:26px 18px;}
+  .section{display:none;animation:fadeIn .35s ease;}
+  .section.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .section-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .section-title .bar{width:5px;height:26px;background:var(--ielts-red);border-radius:3px;}
+  .section-title h2{margin:0;font-size:clamp(18px,3vw,23px);}
+  .section-sub{color:var(--muted);margin:0 0 22px;font-size:14px;max-width:760px;}
+
+  .speak-btn{
+    background:var(--blue-accent);border:none;color:#fff;width:38px;height:38px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:.15s;
+    flex-shrink:0;
+  }
+  .speak-btn:hover{background:var(--navy);transform:scale(1.05);}
+  .speak-btn.small{width:30px;height:30px;font-size:13px;}
+
+  .vocab-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;
+  }
+  .vocab-card{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px;border-left:5px solid var(--ielts-red);transition:.2s;
+  }
+  .vocab-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,19,43,0.12);}
+  .vocab-card h4{
+    margin:0 0 10px;color:var(--navy);font-size:18px;display:flex;align-items:center;
+    justify-content:space-between;gap:8px;
+  }
+  .vocab-card .tag{
+    display:inline-block;font-size:10px;background:#e0e7ff;color:var(--blue-accent);
+    padding:2px 8px;border-radius:10px;font-weight:800;letter-spacing:.5px;margin-bottom:8px;
+  }
+  .vocab-card .def{font-size:14px;color:var(--ink);line-height:1.5;margin:0 0 10px;}
+  .vocab-card .example{
+    font-style:italic;color:var(--blue-accent);font-size:13px;display:block;
+    padding-left:10px;border-left:3px solid var(--blue-accent);
+  }
+
+  .quiz-card{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:24px;margin-bottom:16px;
+  }
+  .quiz-num{font-size:11px;font-weight:800;color:var(--ielts-red);letter-spacing:1px;margin-bottom:6px;}
+  .quiz-q{font-size:16px;font-weight:700;margin:0 0 14px;line-height:1.5;}
+  .quiz-q .blank{
+    background:#fff3cd;padding:2px 8px;border-radius:4px;border-bottom:2px solid #f59e0b;
+    font-weight:800;
+  }
+  .fb-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+  .fb-choice{
+    background:#f1f5f9;border:2px solid #e2e8f0;border-radius:10px;padding:12px;
+    font-weight:700;font-size:14px;cursor:pointer;text-align:center;transition:.15s;
+  }
+  .fb-choice:hover{border-color:var(--blue-accent);}
+  .fb-choice.correct{background:#dcfce7;border-color:#22c55e;color:#15803d;}
+  .fb-choice.wrong{background:#fee2e2;border-color:var(--ielts-red);color:var(--ielts-red);}
+  .feedback{margin-top:12px;font-weight:700;min-height:20px;font-size:14px;}
+
+  .cue-card{
+    background:#fffbe0;border:2px dashed #f59e0b;padding:20px;border-radius:12px;
+    text-align:left;margin-bottom:20px;
+  }
+  .cue-card h4{margin:0 0 6px;color:var(--navy);font-size:16px;}
+  .cue-card ul{margin:8px 0 0 20px;padding:0;}
+  .cue-card li{margin-bottom:4px;font-weight:600;color:var(--navy);font-size:14px;}
+
+  .mic-btn{
+    width:80px;height:80px;border-radius:50%;background:var(--ielts-red);color:#fff;border:none;
+    font-size:32px;cursor:pointer;box-shadow:0 6px 18px rgba(217,4,41,.35);transition:.15s;
+    margin:16px auto;display:flex;align-items:center;justify-content:center;
+  }
+  .mic-btn.listening{animation:pulse 1s infinite;background:#b91c1c;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(217,4,41,.6);}
+    70%{box-shadow:0 0 0 20px rgba(217,4,41,0);}
+    100%{box-shadow:0 0 0 0 rgba(217,4,41,0);}
+  }
+
+  footer.bottom{text-align:center;color:var(--muted);font-size:12px;padding:20px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="badge">Collins Vocabulary for IELTS · Unit 3</span>
+    <h1>Education — Academic Subjects &amp; Activities</h1>
+    <p>Naming academic subjects · Verbs, nouns and adjectives associated with academic study · Choosing the correct part of speech</p>
+    <nav class="tabs" id="tabsNav">
+      <button class="tab-btn active" data-tab="1">📚 Vocabulary (11)</button>
+      <button class="tab-btn" data-tab="2">📝 Definitions Quiz</button>
+      <button class="tab-btn" data-tab="3">🔗 Collocations Quiz</button>
+      <button class="tab-btn" data-tab="4">🎙️ Speaking Practice</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="section active" id="tab1">
+    <div class="section-title"><span class="bar"></span><h2>Education Vocabulary Bank</h2></div>
+    <p class="section-sub">Las 11 palabras clave de la página 15. Presiona 🔊 para escuchar la pronunciación británica y verás el ejemplo real del libro.</p>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </section>
+
+  <section class="section" id="tab2">
+    <div class="section-title"><span class="bar"></span><h2>Quiz 1 — Match the Definition</h2></div>
+    <p class="section-sub">Lee la definición y elige la palabra correcta. Basado en las definiciones del Collins.</p>
+    <div id="defQuiz"></div>
+  </section>
+
+  <section class="section" id="tab3">
+    <div class="section-title"><span class="bar"></span><h2>Quiz 2 — Collocations in Context</h2></div>
+    <p class="section-sub">Completa las oraciones con el término correcto, tal como aparece en el libro.</p>
+    <div id="collQuiz"></div>
+  </section>
+
+  <section class="section" id="tab4">
+    <div class="section-title"><span class="bar"></span><h2>Speaking — Education Topic</h2></div>
+    <p class="section-sub">Practica Speaking Part 2 y 3 usando el vocabulario académico que acabas de aprender.</p>
+
+    <div class="cue-card">
+      <h4>Part 2 Cue Card (2 minutes)</h4>
+      <p style="margin:6px 0;font-size:14px;color:var(--muted);">Describe a subject you studied at school or university that you found particularly interesting.</p>
+      <p style="margin:6px 0;font-size:13px;color:var(--muted);font-weight:700;">You should say:</p>
+      <ul>
+        <li>What the subject was and why you chose it</li>
+        <li>What the teacher or professor was like</li>
+        <li>What specific activities or research you did</li>
+        <li>And explain how this subject has influenced your career or thinking.</li>
+      </ul>
+      <p style="margin-top:12px;font-size:13px;color:var(--navy);font-weight:700;">
+        💡 Try to use at least 5 of these words: <em>archaeology, astronomy, economics, geology, linguistics, psychology, sociology, analyse, claim, define, evaluate</em>.
+      </p>
+    </div>
+
+    <div style="text-align:center;">
+      <p style="color:var(--muted);font-size:13px;">Presiona el micrófono y comienza tu monólogo en inglés:</p>
+      <button class="mic-btn" id="micBtn">🎙️</button>
+      <div id="transcript" style="margin-top:12px;font-style:italic;color:var(--muted);min-height:24px;">&nbsp;</div>
+      <div id="feedback" style="margin-top:12px;font-weight:700;min-height:24px;"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bottom">🎓 Collins Vocabulary for IELTS · Education Module</footer>
+
+<script>
+/* ---------- VOZ ---------- */
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-GB';
+  u.rate = 0.88;
+  window.speechSynthesis.speak(u);
+}
+
+/* ---------- TABS ---------- */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const sections = document.querySelectorAll('.section');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const n = btn.dataset.tab;
+    tabBtns.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab'+n).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* ---------- VOCABULARIO (COLLINS UNIT 3, P.15) ---------- */
+const VOCAB = [
+  // ACADEMIC SUBJECTS
+  { word: "Archaeology", tag: "UNCOUNTABLE NOUN", def: "The study of the societies and peoples of the past by examining the remains of their buildings, tools, and other objects.", ex: "an archaeology professor at Florida State University" },
+  { word: "Astronomy", tag: "UNCOUNTABLE NOUN", def: "The scientific study of the stars, planets, and other natural objects in space.", ex: "a 10-day astronomy mission" },
+  { word: "Economics", tag: "UNCOUNTABLE NOUN", def: "The study of the way in which money, industry, and trade are organized in a society.", ex: "He gained a first class Honours degree in economics." },
+  { word: "Geology", tag: "UNCOUNTABLE NOUN", def: "The study of the Earth's structure, surface, and origins.", ex: "He was visiting professor of geology at the University of Jordan." },
+  { word: "Linguistics", tag: "UNCOUNTABLE NOUN", def: "The study of the way in which language works.", ex: "Modern linguistics emerged as a distinct field in the nineteenth century." },
+  { word: "Psychology", tag: "UNCOUNTABLE NOUN", def: "The scientific study of the human mind and the reasons for people's behaviour.", ex: "Professor of Psychology at Bedford College" },
+  { word: "Sociology", tag: "UNCOUNTABLE NOUN", def: "The study of society or of the way society is organized.", ex: "a sociology professor at the University of North Carolina" },
+  // ACADEMIC ACTIVITIES
+  { word: "Analyse", tag: "VERB", def: "If you analyse something, you consider it carefully or use statistical methods in order to fully understand it.", ex: "McCarthy was asked to analyse the data from the first phase of trials of the vaccine." },
+  { word: "Claim", tag: "VERB", def: "If you say that someone claims that something is true, you mean they say that it is true but you are not sure whether or not they are telling the truth.", ex: "He claimed that it was all a conspiracy against him." },
+  { word: "Define", tag: "VERB", def: "If you define a word or expression, you explain its meaning, for example in a dictionary.", ex: "Collins English Dictionary defines a workaholic as 'a person obsessively addicted to work'." },
+  { word: "Evaluate", tag: "VERB", def: "If you evaluate something or someone, you consider them in order to make a judgment about them, for example about how good or bad they are.", ex: "They will evaluate the impact of the new policy on student performance." }
+];
+
+function renderVocab(){
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = VOCAB.map(v => `
+    <div class="vocab-card">
+      <span class="tag">${v.tag}</span>
+      <h4>${v.word}
+        <button class="speak-btn small" onclick="speak('${v.word}')" title="Listen">🔊</button>
+      </h4>
+      <p class="def">${v.def}</p>
+      <span class="example">"${v.ex}"</span>
+    </div>
+  `).join('');
+}
+
+/* ---------- QUIZ 1: DEFINICIONES ---------- */
+const DEF_QUIZ = [
+  { q: "The study of the societies and peoples of the past by examining remains of buildings and tools.", correct: "Archaeology", opts: ["Geology", "Archaeology", "Sociology", "Astronomy"] },
+  { q: "The scientific study of the stars, planets, and other natural objects in space.", correct: "Astronomy", opts: ["Astronomy", "Geology", "Psychology", "Linguistics"] },
+  { q: "The study of the way in which money, industry, and trade are organized in a society.", correct: "Economics", opts: ["Sociology", "Economics", "Linguistics", "Psychology"] },
+  { q: "The study of the Earth's structure, surface, and origins.", correct: "Geology", opts: ["Archaeology", "Geology", "Astronomy", "Economics"] },
+  { q: "The study of the way in which language works.", correct: "Linguistics", opts: ["Psychology", "Linguistics", "Sociology", "Economics"] },
+  { q: "The scientific study of the human mind and the reasons for people's behaviour.", correct: "Psychology", opts: ["Sociology", "Psychology", "Linguistics", "Geology"] },
+  { q: "The study of society or of the way society is organized.", correct: "Sociology", opts: ["Sociology", "Anthropology", "Psychology", "Archaeology"] },
+  { q: "If you _______ something, you consider it carefully or use statistical methods to fully understand it.", correct: "analyse", opts: ["analyse", "define", "evaluate", "claim"] },
+  { q: "If you _______ a word, you explain its meaning, for example in a dictionary.", correct: "define", opts: ["claim", "define", "analyse", "evaluate"] },
+  { q: "If you _______ someone, you consider them in order to make a judgment about them.", correct: "evaluate", opts: ["analyse", "evaluate", "claim", "define"] }
+];
+
+function renderDefQuiz(){
+  const container = document.getElementById('defQuiz');
+  container.innerHTML = DEF_QUIZ.map((item, i) => `
+    <div class="quiz-card">
+      <div class="quiz-num">QUESTION ${i+1} OF ${DEF_QUIZ.length}</div>
+      <p class="quiz-q">${item.q}</p>
+      <div class="fb-choices">
+        ${item.opts.map(o => `<div class="fb-choice" data-correct="${o === item.correct}">${o}</div>`).join('')}
+      </div>
+      <div class="feedback"></div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.quiz-card').forEach(card => {
+    const fb = card.querySelector('.feedback');
+    card.querySelectorAll('.fb-choice').forEach(ch => {
+      ch.addEventListener('click', () => {
+        if(ch.dataset.correct === 'true'){
+          ch.classList.add('correct');
+          fb.textContent = '✅ Correct!';
+          fb.style.color = '#15803d';
+          speak(ch.textContent);
+        } else {
+          ch.classList.add('wrong');
+          fb.textContent = '❌ Incorrect. Try again.';
+          fb.style.color = 'var(--ielts-red)';
+          setTimeout(()=> ch.classList.remove('wrong'), 600);
+        }
+      });
+    });
+  });
+}
+
+/* ---------- QUIZ 2: COLOCACIONES ---------- */
+const COLL_QUIZ = [
+  { q: 'He was visiting professor of ______ at the University of Jordan.', correct: 'geology', opts: ['geology', 'astronomy', 'economics', 'linguistics'] },
+  { q: 'Modern ______ emerged as a distinct field in the nineteenth century.', correct: 'linguistics', opts: ['sociology', 'linguistics', 'psychology', 'archaeology'] },
+  { q: 'He gained a first class Honours degree in ______.', correct: 'economics', opts: ['geology', 'economics', 'sociology', 'astronomy'] },
+  { q: 'McCarthy was asked to ______ the data from the first phase of trials.', correct: 'analyse', opts: ['define', 'analyse', 'claim', 'evaluate'] },
+  { q: 'Collins English Dictionary ______ a workaholic as "a person obsessively addicted to work".', correct: 'defines', opts: ['claims', 'analyses', 'defines', 'evaluates'] },
+  { q: 'He ______ that it was all a conspiracy against him.', correct: 'claimed', opts: ['defined', 'evaluated', 'claimed', 'analysed'] },
+  { q: 'They will ______ the impact of the new policy on student performance.', correct: 'evaluate', opts: ['claim', 'evaluate', 'define', 'analyse'] },
+  { q: 'Professor of ______ at Bedford College conducted research in educational psychology.', correct: 'Psychology', opts: ['Sociology', 'Psychology', 'Linguistics', 'Geology'] },
+  { q: 'A 10-day ______ mission was launched to study distant galaxies.', correct: 'astronomy', opts: ['archaeology', 'astronomy', 'geology', 'economics'] },
+  { q: 'A ______ professor at the University of North Carolina wrote a treatise on the sociology of religion.', correct: 'sociology', opts: ['psychology', 'sociology', 'linguistics', 'archaeology'] }
+];
+
+function renderCollQuiz(){
+  const container = document.getElementById('collQuiz');
+  container.innerHTML = COLL_QUIZ.map((item, i) => {
+    const qRendered = item.q.replace(/______/g, '<span class="blank">______</span>');
+    return `
+      <div class="quiz-card">
+        <div class="quiz-num">QUESTION ${i+1} OF ${COLL_QUIZ.length}</div>
+        <p class="quiz-q">${qRendered}</p>
+        <div class="fb-choices">
+          ${item.opts.map(o => `<div class="fb-choice" data-correct="${o === item.correct}">${o}</div>`).join('')}
+        </div>
+        <div class="feedback"></div>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.quiz-card').forEach(card => {
+    const fb = card.querySelector('.feedback');
+    card.querySelectorAll('.fb-choice').forEach(ch => {
+      ch.addEventListener('click', () => {
+        if(ch.dataset.correct === 'true'){
+          ch.classList.add('correct');
+          fb.textContent = '✅ Correct! Great collocation.';
+          fb.style.color = '#15803d';
+          speak(ch.textContent);
+        } else {
+          ch.classList.add('wrong');
+          fb.textContent = '❌ Incorrect. Review the example in the vocabulary bank.';
+          fb.style.color = 'var(--ielts-red)';
+          setTimeout(()=> ch.classList.remove('wrong'), 600);
+        }
+      });
+    });
+  });
+}
+
+/* ---------- SPEAKING ---------- */
+const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+const micBtn = document.getElementById('micBtn');
+
+if(SpeechAPI){
+  const rec = new SpeechAPI();
+  rec.lang = 'en-GB';
+  rec.continuous = false;
+  rec.interimResults = false;
+
+  micBtn.onclick = () => {
+    rec.start();
+    micBtn.classList.add('listening');
+    document.getElementById('transcript').textContent = '🎧 Listening to your monologue...';
+    document.getElementById('feedback').textContent = '';
+  };
+
+  rec.onresult = (e) => {
+    micBtn.classList.remove('listening');
+    const txt = e.results[0][0].transcript;
+    document.getElementById('transcript').textContent = `📝 "${txt}"`;
+
+    const used = VOCAB.filter(v => txt.toLowerCase().includes(v.word.toLowerCase())).map(v => v.word);
+    const fb = document.getElementById('feedback');
+    if(used.length > 0){
+      fb.textContent = `✅ You used: ${used.join(', ')}. Excellent lexical resource!`;
+      fb.style.color = '#15803d';
+    } else {
+      fb.textContent = '💡 Try to include at least 3 academic words from the vocabulary bank.';
+      fb.style.color = 'var(--ielts-red)';
+    }
+  };
+
+  rec.onerror = () => {
+    micBtn.classList.remove('listening');
+    document.getElementById('feedback').textContent = '⚠️ Microphone error. Please check browser permissions.';
+    document.getElementById('feedback').style.color = 'var(--ielts-red)';
+  };
+} else {
+  document.getElementById('transcript').textContent = 'Voice recognition not supported. Use Google Chrome.';
+}
+
+/* ---------- INIT ---------- */
+renderVocab();
+renderDefQuiz();
+renderCollQuiz();
+</script>
+</body>
+</html>
